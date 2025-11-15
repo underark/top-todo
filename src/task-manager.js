@@ -1,15 +1,15 @@
-import Task from "./todo.js"
+import { ToDo } from "./todo";
 
 export class TaskManager {
-    #tasks = new Map();
+    #tasks = [];
 
     addTask(title, description, dueDate, priority) {
-        const t = new Task(title, description, dueDate, priority);
-        this.#tasks.set(crypto.randomUUID(), t);
+        const t = new ToDo(title, description, dueDate, priority);
+        this.#tasks.push(t);
         return t;
     }
 
     getTask(id) {
-        return this.#tasks.get(id);
+        return this.#tasks.filter(t => t.id() == id);
     }
 }
