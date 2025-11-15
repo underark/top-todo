@@ -1,15 +1,18 @@
-export class ViewManager {
-    #table;
+// This is a factory function because we want to make the tbody private but pass the functions around later
+export function ViewManager(selector) {
+    const table = document.querySelector(selector);
 
-    constructor(selector) {
-        this.#table = document.querySelector(selector);
+    const appendRow = (row) => {
+        table.appendChild(row);
     }
 
-    appendRow(row) {
-        this.#table.appendChild(row);
-    }
-
-    removeRow(id) {
+    const removeRow = (id) => {
         const row = document.querySelector("#" + id);
+        table.removeChild(row);
     }
-}
+    
+    return {
+        appendRow,
+        removeRow,
+    }
+};

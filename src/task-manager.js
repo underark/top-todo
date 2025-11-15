@@ -1,15 +1,26 @@
 import { ToDo } from "./todo";
 
-export class TaskManager {
-    #tasks = [];
+// This is a factory function because we want to make the array private but pass the functions around later
+export function TaskManager() {
+    let tasks = new Array();
 
-    addTask(title, description, dueDate, priority) {
+    const addTask = (title, description, dueDate, priority) => {
         const t = new ToDo(title, description, dueDate, priority);
-        this.#tasks.push(t);
+        tasks.push(t);
         return t;
     }
 
-    getTask(id) {
-        return this.#tasks.filter(t => t.id() == id);
+    const deleteTask = (id) => {
+        tasks = tasks.filter(t => t.id != id);
+    }
+
+    const getTask = (id) => {
+        return tasks.filter(t => t.id() == id);
+    };
+
+    return {
+        addTask,
+        deleteTask,
+        getTask,
     }
 }
