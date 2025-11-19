@@ -10,6 +10,10 @@ export function TaskManager() {
         return t;
     }
 
+    const addTasksFromObject = (objectArray) => {
+        tasks = objectArray.map(o => ToDo.fromObject(o));
+    }
+
     const deleteTask = (id) => {
         tasks = tasks.filter(t => t.id != id);
     }
@@ -18,9 +22,15 @@ export function TaskManager() {
         return tasks.filter(t => t.id() == id);
     };
 
+    const getTasks = () => {
+        return tasks.map(t => t.asObject());
+    }
+
     return {
         addTask,
+        addTasksFromObject,
         deleteTask,
         getTask,
+        getTasks,
     }
 }

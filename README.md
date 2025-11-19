@@ -8,3 +8,7 @@ TODO
     -- View all projects
     -- View todos by project
     -- Expand a todo to see its details
+
+
+Current issues:
+-- 

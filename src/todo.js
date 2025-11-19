@@ -6,6 +6,8 @@ export class ToDo {
     #priority;
 
     constructor(title, description, dueDate, priority) {
+        // Adding an "r" because we will use these for html IDs, which cannot begin with numbers
+        // when used as CSS selectors
         this.#id = "r" + crypto.randomUUID();
         this.#title = title;
         this.#description = description;
@@ -31,5 +33,23 @@ export class ToDo {
 
     get priority() {
         return this.#priority;
+    }
+
+    asObject() {
+        return {
+            title: this.#title,
+            description: this.#description,
+            dueDate: this.#dueDate,
+            priority: this.priority,
+        }
+    }
+
+    static fromObject(object) {
+        return new ToDo(
+            object.title,
+            object.description,
+            object.dueDate,
+            object.priority
+        )
     }
 }
