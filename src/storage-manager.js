@@ -23,8 +23,8 @@ export class StorageManager {
 
     // TODO: rewrite this to use const [] of ... syntax
     writeToStorage(projectsMap) {
-        for (const project of projectsMap) {
-            localStorage.setItem(project[0], JSON.stringify(project[1]));
+        for (const [project, array] of projectsMap) {
+            localStorage.setItem(project, JSON.stringify(array));
         }
         console.log(localStorage);
     }

@@ -27,8 +27,11 @@ export function TaskManager() {
         return tasks.filter(t => t.id() == id);
     };
 
-    // Consider renaming method and adding a new method to get the raw tasks
     const getTasks = () => {
+        return tasks;
+    }
+
+    const getTasksAsObjects = () => {
         return tasks.map(t => t.asObject());
     }
 
@@ -38,5 +41,6 @@ export function TaskManager() {
         deleteTask,
         getTask,
         getTasks,
+        getTasksAsObjects,
     }
 }

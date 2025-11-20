@@ -26,6 +26,14 @@ export function ProjectManager() {
         return m;
     }
 
+    const getProjectsAsObjects = () => {
+        const m = new Map();
+        for (const [project, taskManager] of projects) {
+            m.set(project, taskManager.getTasksAsObjects());
+        }
+        return m;
+    }
+
     const getDeleteMethod = (projectName) => {
         const taskManager = projects.get(projectName);
         return taskManager.deleteTask;
@@ -41,6 +49,7 @@ export function ProjectManager() {
     return {
         addProject,
         getProjects,
+        getProjectsAsObjects,
         getDeleteMethod,
         addTaskFromData,
         deleteTask,

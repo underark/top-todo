@@ -4,32 +4,53 @@ import { TableFactory } from "./table-factory";
 export function ViewManager(selector) {
     const tableFactory = new TableFactory();
     const table = document.querySelector(selector);
+    const projectRows = new Map();
 
-    const addToDo = (toDo) => {
+    // Move these method returns to a stored array variable and add a getter
+    const addToDo = (project, toDo) => {
         const rowObject = tableFactory.makeTableRow(toDo);
         appendRow(rowObject.row);
-        return rowObject;
+        pushToMap(project, rowObject);
     }
 
     const addAllToDo = (toDoMap) => {
-        // Kind of ugly that we're not using project here...
         for (const [project, toDos] of toDoMap) {
-            toDos.forEach(toDo => addToDo(toDo));
+            toDos.forEach(toDo => addToDo(project, toDo));
         }
     }
 
     const removeToDo = (id) => {
         const row = document.querySelector("#" + id);
+        console.log(id);
         table.removeChild(row);
+    }
+
+    const getRows = () => {
+        return projectRows;
+    }
+
+    const getRow = (project, id) => {
+        return projectRows.get(project).find(r => r.row.id == id);
     }
 
     const appendRow = (row) => {
         table.appendChild(row);
+    }
+
+    const pushToMap = (project, rowObject) => {
+        if (projectRows.has(project)) {
+            projectRows.get(project).push(rowObject);
+        } else {
+            projectRows.set(project, []);
+            projectRows.get(project).push(rowObject);
+        }
     }
     
     return {
         addToDo,
         addAllToDo,
         removeToDo,
+        getRow,
+        getRows,
     }
 };

@@ -12,23 +12,24 @@ const form = document.querySelector("form");
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    projectManager.addProject("default");
     // Add a service layer to handle all this logic
     const savedData = storageManager.readFromStorage();
-    console.log(savedData);
     projectManager.buildFromObjects(savedData);
     viewManager.addAllToDo(projectManager.getProjects());
-    console.log(projectManager.getProjects());
+    buttonShop.wireButtons(viewManager.getRows(), projectManager.getDeleteMethod, viewManager.removeToDo);
 
     form.addEventListener("submit", e => {
         e.preventDefault();
         const data = new FormData(form);
-        const t = projectManager.addTaskFromData("default", data);
-        const rowObject = viewManager.addToDo(t);
-        buttonShop.wireButton(rowObject.deleteButton, t.id, viewManager.removeToDo, projectManager.getDeleteMethod("default"));
+        const toDo = projectManager.addTaskFromData("default", data);
+        viewManager.addToDo("default", toDo);
+        const row = viewManager.getRow("default", toDo.id);
+        buttonShop.wireButton(row.deleteButton, toDo.id, projectManager.getDeleteMethod("default"), viewManager.removeToDo);
     });
 });
 
 document.addEventListener("visibilitychange", () => {
-    const projectsMap = projectManager.getProjects();
+    const projectsMap = projectManager.getProjectsAsObjects();
     storageManager.writeToStorage(projectsMap);
 }) 
