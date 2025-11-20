@@ -1,13 +1,7 @@
 export class ButtonShop {
-    #deleteFunctions = [];
-
-    constructor(deleteFunctionArray) {
-        this.#deleteFunctions = deleteFunctionArray;
-    }
-
-    wireDeleteButton(button, id) {
+    wireButton(button, id, ...functions) {
         button.addEventListener("click", () => {
-            this.#deleteFunctions.forEach(f => f(id));
+            functions.forEach(f => f(id));
         });
     }
 }

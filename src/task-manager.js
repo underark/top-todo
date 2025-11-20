@@ -4,8 +4,13 @@ import { ToDo } from "./todo";
 export function TaskManager() {
     let tasks = new Array();
 
-    const addTask = (title, description, dueDate, priority) => {
-        const t = new ToDo(title, description, dueDate, priority);
+    const addTask = (data) => {
+        const t = new ToDo(
+            data.get("title"),
+            data.get("description"),
+            data.get("dueDate"),
+            data.get("priority")
+        );
         tasks.push(t);
         return t;
     }
@@ -22,6 +27,7 @@ export function TaskManager() {
         return tasks.filter(t => t.id() == id);
     };
 
+    // Consider renaming method and adding a new method to get the raw tasks
     const getTasks = () => {
         return tasks.map(t => t.asObject());
     }

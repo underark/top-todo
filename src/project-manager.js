@@ -8,9 +8,9 @@ export function ProjectManager() {
         return projects.get(projectName);
     }
 
-    const addTask = (projectName, title, description, dueDate, priority) => {
+    const addTaskFromData = (projectName, data) => {
         const taskManager = projects.get(projectName);
-        return taskManager.addTask(title, description, dueDate, priority);
+        return taskManager.addTask(data);
     }
 
     const deleteTask = (projectName, id) => {
@@ -26,6 +26,11 @@ export function ProjectManager() {
         return m;
     }
 
+    const getDeleteMethod = (projectName) => {
+        const taskManager = projects.get(projectName);
+        return taskManager.deleteTask;
+    }
+
     const buildFromObjects = (projectsMap) => {
         for (const [project, tasks] of projectsMap) {
             const taskManager = addProject(project);
@@ -36,7 +41,8 @@ export function ProjectManager() {
     return {
         addProject,
         getProjects,
-        addTask,
+        getDeleteMethod,
+        addTaskFromData,
         deleteTask,
         buildFromObjects,
     }
