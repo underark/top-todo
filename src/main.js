@@ -6,7 +6,6 @@ import { StorageManager } from "./storage-manager";
 
 const projectManager = ProjectManager();
 const viewManager = ViewManager("tbody");
-const tableFactory = new TableFactory();
 // Feature is currently broken - find a way to reference the correct project
 const buttonShop = new ButtonShop([projectManager.deleteTask, viewManager.removeRow]);
 const storageManager = new StorageManager();
@@ -17,7 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedData = storageManager.readFromStorage();
     console.log(savedData);
     projectManager.buildFromObjects(savedData);
-    
+    viewManager.addAllToDo(projectManager.getProjects());
+    console.log(projectManager.getProjects());
+
     form.addEventListener("submit", e => {
         e.preventDefault();
         const data = new FormData(form);
@@ -30,16 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
             data.get("priority")
         );
 
-        const rowObject = tableFactory.makeTableRow(
-            t.id,
-            t.title,
-            t.description,
-            t.dueDate,
-            t.priority
-        );
-
+        const rowObject = viewManager.addToDo(t);
         buttonShop.wireDeleteButton(rowObject.deleteButton, t.id);
-        viewManager.appendRow(rowObject.row);
     });
 });
 

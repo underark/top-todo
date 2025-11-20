@@ -5,6 +5,7 @@ export function ProjectManager() {
 
     const addProject = (projectName) => {
         projects.set(projectName, TaskManager());
+        return projects.get(projectName);
     }
 
     const addTask = (projectName, title, description, dueDate, priority) => {
@@ -27,11 +28,9 @@ export function ProjectManager() {
 
     const buildFromObjects = (projectsMap) => {
         for (const [project, tasks] of projectsMap) {
-            addProject(project);
-            const taskManager = projects.get(project);
+            const taskManager = addProject(project);
             taskManager.addTasksFromObject(tasks);
         }
-        console.log(getProjects());
     }
 
     return {

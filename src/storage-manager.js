@@ -18,9 +18,10 @@ export class StorageManager {
     }
 
     storageIsEmpty() {
-        return localStorage.length == 0;
+        return localStorage.length === 0;
     }
 
+    // TODO: rewrite this to use const [] of ... syntax
     writeToStorage(projectsMap) {
         for (const project of projectsMap) {
             localStorage.setItem(project[0], JSON.stringify(project[1]));
@@ -28,6 +29,7 @@ export class StorageManager {
         console.log(localStorage);
     }
 
+    // TODO: Can this be rewritten to use reduce? hehehhe
     readFromStorage() {
         const m = new Map();
         Object.keys(localStorage).forEach(project => {

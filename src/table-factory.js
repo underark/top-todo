@@ -1,14 +1,13 @@
 export class TableFactory {
     // Returning the row and buttons in an object so we can wire up methods to buttons later
-    makeTableRow(id, title, description, dueDate, priority) {
-        const tr = document.createElement("tr");
-        tr.id = id;
-        const titleCell = this.#makeTableData(title);
-        const descCell = this.#makeTableData(description);
-        const dueCell = this.#makeTableData(dueDate);
-        const priorityCell = this.#makeTableData(priority);
+    makeTableRow(toDo) {
+        const titleCell = this.#makeTableData(toDo.title);
+        const descCell = this.#makeTableData(toDo.description);
+        const dueCell = this.#makeTableData(toDo.dueDate);
+        const priorityCell = this.#makeTableData(toDo.priority);
         const delButton = this.#makeButton("🗑️");
-        this.#collectElements(tr, titleCell, descCell, dueCell, priorityCell, delButton);
+        const tr = this.#collectElements(titleCell, descCell, dueCell, priorityCell, delButton);
+        tr.id = toDo.id;
         return {
             row: tr,
             deleteButton: delButton,
@@ -27,8 +26,9 @@ export class TableFactory {
         return b;
     }
 
-    #collectElements(container, ...elements) {
-        elements.forEach(e => container.appendChild(e));
-        return container;
+    #collectElements(...elements) {
+        const tr = document.createElement("tr");
+        elements.forEach(e => tr.appendChild(e));
+        return tr;
     }
 }
