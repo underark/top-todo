@@ -8,6 +8,7 @@ export class FormManager {
     }
 
     populateProjectSelect(projects) {
+        this.#clearProjectSelect();
         projects.forEach(p => {
             const option = this.#createProjectOption(p);
             this.#projectSelect.appendChild(option);
@@ -19,5 +20,11 @@ export class FormManager {
         option.value = project;
         option.textContent = project;
         return option;
+    }
+
+    #clearProjectSelect() {
+        while (this.#projectSelect.firstChild) {
+            this.#projectSelect.removeChild(this.#projectSelect.firstChild);
+        }
     }
 }

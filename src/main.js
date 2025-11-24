@@ -11,16 +11,26 @@ const formManager = new FormManager();
 const buttonShop = new ButtonShop();
 const storageManager = new StorageManager();
 const form = document.querySelector("form");
+const newProjectButton = document.querySelector("#project-new");
 
 
 document.addEventListener("DOMContentLoaded", () => {
     projectManager.addProject("default");
     // Add a service layer to handle all this logic
     const savedData = storageManager.readFromStorage();
-    formManager.populateProjectSelect(projectManager.getProjectNames());
+    console.log(savedData);
     projectManager.buildFromObjects(savedData);
+    formManager.populateProjectSelect(projectManager.getProjectNames());
     viewManager.addAllToDo(projectManager.getProjects());
-    buttonShop.wireButtons(viewManager.getRows(), projectManager.getDeleteMethod, viewManager.removeToDo);
+    buttonShop.wireDeleteButtons(viewManager.getRows(), projectManager.getDeleteMethod, viewManager.removeToDo);
+
+    newProjectButton.addEventListener("click", () => {
+        const projectName = prompt("Enter a project title");
+        if (projectName) {
+            projectManager.addProject(projectName);
+            formManager.populateProjectSelect(projectManager.getProjectNames());
+        }
+    })
 
     form.addEventListener("submit", e => {
         e.preventDefault();
