@@ -26,6 +26,10 @@ export function ProjectManager() {
         return m;
     }
 
+    const getProjectNames = () => {
+        return projects.keys();
+    }
+
     const getProjectsAsObjects = () => {
         const m = new Map();
         for (const [project, taskManager] of projects) {
@@ -49,6 +53,7 @@ export function ProjectManager() {
     return {
         addProject,
         getProjects,
+        getProjectNames,
         getProjectsAsObjects,
         getDeleteMethod,
         addTaskFromData,
