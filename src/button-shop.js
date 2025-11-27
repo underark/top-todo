@@ -7,7 +7,8 @@ export class ButtonShop {
 
     wireDeleteButtons(rowMap, deleteMethod, otherFunctions) {
         for (const [project, rows] of rowMap) {
-             rows.forEach(row => this.wireButton(row.deleteButton, row.row.id, deleteMethod(project), otherFunctions));
+            console.log(rows);
+             rows.forEach(row => this.wireButton(row.deleteButton, row.card.id, deleteMethod(project), otherFunctions));
         }
     }
 

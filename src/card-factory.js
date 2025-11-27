@@ -7,7 +7,7 @@ export class CardFactory {
         card.appendChild(t);
         card.appendChild(d);
         card.appendChild(b);
-        this.#applyCardStyles(card);
+        this.#applyCardStyles(card, toDo);
         return {
             card: card,
             deleteButton: b,
@@ -32,7 +32,8 @@ export class CardFactory {
         return b;
     }
 
-    #applyCardStyles(card) {
+    #applyCardStyles(card, toDo) {
         card.classList.add("card");
+        card.id = toDo.id;
     }
 }

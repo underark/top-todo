@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const data = new FormData(form);
         const toDo = projectManager.addTaskFromData(data.get("project"), data);
-        viewManager.addToDo("default", toDo);
-        const row = viewManager.getRow("default", toDo.id);
+        viewManager.addToDo(data.get("project"), toDo);
+        const row = viewManager.getRow(data.get("project"), toDo.id);
         buttonShop.wireButton(row.deleteButton, toDo.id, projectManager.getDeleteMethod("default"), viewManager.removeToDo);
     });
 });
