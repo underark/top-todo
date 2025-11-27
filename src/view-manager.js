@@ -14,15 +14,28 @@ export function ViewManager(selector) {
     }
 
     const addAllToDo = (toDoMap) => {
+        clearToDos();
         for (const [project, toDos] of toDoMap) {
             toDos.forEach(toDo => addToDo(project, toDo));
         }
+    }
+    
+    const ShowProjectToDo = (project) => {
+        clearToDos();
+        const toDoRows = projectRows.get(project);
+        toDoRows.forEach(row => appendRow(row.row));
     }
 
     const removeToDo = (id) => {
         const row = document.querySelector("#" + id);
         console.log(id);
         table.removeChild(row);
+    }
+
+    const clearToDos = () => {
+        while (table.firstChild) {
+            table.removeChild(table.lastChild);
+        }
     }
 
     const getRows = () => {
@@ -49,6 +62,7 @@ export function ViewManager(selector) {
     return {
         addToDo,
         addAllToDo,
+        ShowProjectToDo,
         removeToDo,
         getRow,
         getRows,

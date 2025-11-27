@@ -26,6 +26,10 @@ export function ProjectManager() {
         return m;
     }
 
+    const getProjectFromName = (project) => {
+        return projects.get(project).getTasks();
+    }
+
     const getProjectNames = () => {
         return projects.keys();
     }
@@ -53,6 +57,7 @@ export function ProjectManager() {
     return {
         addProject,
         getProjects,
+        getProjectFromName,
         getProjectNames,
         getProjectsAsObjects,
         getDeleteMethod,

@@ -12,6 +12,7 @@ const buttonShop = new ButtonShop();
 const storageManager = new StorageManager();
 const form = document.querySelector("form");
 const newProjectButton = document.querySelector("#project-new");
+const options = document.querySelectorAll("select");
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,6 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
     formManager.populateProjectSelect(projectManager.getProjectNames());
     viewManager.addAllToDo(projectManager.getProjects());
     buttonShop.wireDeleteButtons(viewManager.getRows(), projectManager.getDeleteMethod, viewManager.removeToDo);
+
+    // TODO: Add filter for individual projects
+    options.forEach(option => {
+        option.addEventListener("click", () => {
+            viewManager.ShowProjectToDo(option.value);
+        });
+    });
+
 
     newProjectButton.addEventListener("click", () => {
         const projectName = prompt("Enter a project title");
