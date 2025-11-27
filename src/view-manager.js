@@ -44,7 +44,7 @@ export function ViewManager(selector) {
     }
 
     const getRow = (project, id) => {
-        return projectRows.get(project).find(r => r.row.id == id);
+        return projectRows.get(project).find(r => r.card.id == id);
     }
 
     const appendRow = (row) => {
