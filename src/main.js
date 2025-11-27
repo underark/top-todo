@@ -3,6 +3,7 @@ import { ViewManager } from "./view-manager";
 import { ButtonShop } from "./button-shop";
 import { StorageManager } from "./storage-manager";
 import { FormManager } from "./form-manager";
+import "./style.css";
 
 const projectManager = ProjectManager();
 const viewManager = ViewManager("tbody");

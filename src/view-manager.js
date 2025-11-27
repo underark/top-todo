@@ -1,8 +1,10 @@
+import { CardFactory } from "./card-factory";
 import { TableFactory } from "./table-factory";
 
 // This is a factory function because we want to make the tbody private but pass the functions around later
 export function ViewManager(selector) {
     const tableFactory = new TableFactory();
+    const cardFactory = new CardFactory();
     const table = document.querySelector(selector);
     const projectRows = new Map();
 
