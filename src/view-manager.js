@@ -3,16 +3,15 @@ import { TableFactory } from "./table-factory";
 
 // This is a factory function because we want to make the tbody private but pass the functions around later
 export function ViewManager(selector) {
-    const tableFactory = new TableFactory();
     const cardFactory = new CardFactory();
     const table = document.querySelector(selector);
     const projectRows = new Map();
 
     // Move these method returns to a stored array variable and add a getter
     const addToDo = (project, toDo) => {
-        const rowObject = tableFactory.makeTableRow(toDo);
-        appendRow(rowObject.row);
-        pushToMap(project, rowObject);
+        const card = cardFactory.makeCard(toDo);
+        appendRow(card.card);
+        pushToMap(project, card);
     }
 
     const addAllToDo = (toDoMap) => {

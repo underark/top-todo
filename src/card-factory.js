@@ -1,13 +1,17 @@
 export class CardFactory {
-    makeCard(title, dueDate) {
+    makeCard(toDo) {
         const card = document.createElement("div");
-        const t = this.#makeCardTitle(title);
-        const d = this.#makeCardDueDate(dueDate);
-        const b = this.#makeCardButtons();
+        const t = this.#makeCardTitle(toDo.title);
+        const d = this.#makeCardDueDate(toDo.dueDate);
+        const b = this.#makeCardButton();
         card.appendChild(t);
         card.appendChild(d);
         card.appendChild(b);
         this.#applyCardStyles(card);
+        return {
+            card: card,
+            deleteButton: b,
+        }
     }
 
     #makeCardTitle(title) {
@@ -22,13 +26,10 @@ export class CardFactory {
         return p;
     }
 
-    #makeCardButtons() {
-        const d = document.createElement("div");
-        d.classList.add("buttons");
+    #makeCardButton() {
         const b = document.createElement("button");
         b.textContent = "do something";
-        d.appendChild(b);
-        return d;
+        return b;
     }
 
     #applyCardStyles(card) {

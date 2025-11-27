@@ -6,7 +6,7 @@ import { FormManager } from "./form-manager";
 import "./style.css";
 
 const projectManager = ProjectManager();
-const viewManager = ViewManager("tbody");
+const viewManager = ViewManager("#toDo");
 const formManager = new FormManager();
 // Feature is currently broken - find a way to reference the correct project
 const buttonShop = new ButtonShop();
