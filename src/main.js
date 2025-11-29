@@ -4,6 +4,7 @@ import { ButtonShop } from "./button-shop";
 import { StorageManager } from "./storage-manager";
 import { FormManager } from "./form-manager";
 import "./style.css";
+import { LayoutManager } from "./layout-manager";
 
 const projectManager = ProjectManager();
 const viewManager = ViewManager("#toDo");
@@ -22,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedData = storageManager.readFromStorage();
     console.log(savedData);
     projectManager.buildFromObjects(savedData);
-    formManager.populateProjectSelect(projectManager.getProjectNames());
+    // formManager.populateProjectSelect(projectManager.getProjectNames());
     viewManager.addAllToDo(projectManager.getProjects());
     buttonShop.wireDeleteButtons(viewManager.getRows(), projectManager.getDeleteMethod, viewManager.removeToDo);
 
@@ -56,3 +57,12 @@ document.addEventListener("visibilitychange", () => {
     const projectsMap = projectManager.getProjectsAsObjects();
     storageManager.writeToStorage(projectsMap);
 }) 
+
+
+// TODO:
+// Add layout switching
+// Refactor logic in main to a coordinator class
+// Polish css
+// Add ability to edit to do
+// Add parsing for dates
+// Add "all" option to view projects
