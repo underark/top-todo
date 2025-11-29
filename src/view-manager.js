@@ -1,11 +1,10 @@
 import { CardFactory } from "./card-factory";
-import { TableFactory } from "./table-factory";
 
 // This is a factory function because we want to make the tbody private but pass the functions around later
 export function ViewManager(selector) {
     const cardFactory = new CardFactory();
     const table = document.querySelector(selector);
-    const projectRows = new Map();
+    const cards = new Map();
 
     // Move these method returns to a stored array variable and add a getter
     const addToDo = (project, toDo) => {
@@ -39,8 +38,8 @@ export function ViewManager(selector) {
         }
     }
 
-    const getRows = () => {
-        return projectRows;
+    const getCards = () => {
+        return cards;
     }
 
     const getRow = (project, id) => {
@@ -52,11 +51,11 @@ export function ViewManager(selector) {
     }
 
     const pushToMap = (project, rowObject) => {
-        if (projectRows.has(project)) {
-            projectRows.get(project).push(rowObject);
+        if (cards.has(project)) {
+            cards.get(project).push(rowObject);
         } else {
-            projectRows.set(project, []);
-            projectRows.get(project).push(rowObject);
+            cards.set(project, []);
+            cards.get(project).push(rowObject);
         }
     }
     
@@ -66,6 +65,6 @@ export function ViewManager(selector) {
         ShowProjectToDo,
         removeToDo,
         getRow,
-        getRows,
+        getCards,
     }
 };

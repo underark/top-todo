@@ -5,7 +5,9 @@ import { StorageManager } from "./storage-manager";
 import { FormManager } from "./form-manager";
 import "./style.css";
 import { LayoutManager } from "./layout-manager";
+import { ToDoCoordinator } from "./todo-coordinator";
 
+const toDoCoordinator = new ToDoCoordinator();
 const projectManager = ProjectManager();
 const viewManager = ViewManager("#toDo");
 const formManager = new FormManager();
@@ -18,14 +20,10 @@ const options = document.querySelectorAll("select");
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    projectManager.addProject("default");
-    // Add a service layer to handle all this logic
-    const savedData = storageManager.readFromStorage();
-    console.log(savedData);
-    projectManager.buildFromObjects(savedData);
+    toDoCoordinator.setUpFromLocalStorage();
+    toDoCoordinator.populateToDoDisplay();
+    toDoCoordinator.wireDeleteButtons();
     // formManager.populateProjectSelect(projectManager.getProjectNames());
-    viewManager.addAllToDo(projectManager.getProjects());
-    buttonShop.wireDeleteButtons(viewManager.getRows(), projectManager.getDeleteMethod, viewManager.removeToDo);
 
     // TODO: Add filter for individual projects
     options.forEach(option => {

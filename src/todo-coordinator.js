@@ -9,18 +9,29 @@ export class ToDoCoordinator {
     #storageManager;
     #projectManager;
     #viewManager;
+    #buttonShop;
 
     constructor() {
         this.#storageManager = new StorageManager();
         this.#projectManager = ProjectManager();
-        this.#viewManager = ViewManager();
+        this.#viewManager = ViewManager("#toDo");
+        this.#buttonShop = new ButtonShop();
     }
 
     setUpFromLocalStorage() {
-        projectManager.addProject("default");
-        const savedData = storageManager.readFromStorage();
-        console.log(savedData);
-        projectManager.buildFromObjects(savedData);
-        viewManager.addAllToDo(projectManager.getProjects());
+        const savedData = this.#storageManager.readFromStorage();
+        this.#projectManager.buildFromObjects(savedData);
+    }
+
+    populateToDoDisplay() {
+        const toDos = this.#projectManager.getProjects();
+        this.#viewManager.addAllToDo(toDos);
+    }
+
+    wireDeleteButtons() {
+        const cards = this.#viewManager.getCards();
+        const deleteMethod = this.#projectManager.getDeleteMethod;
+        const viewDeleteMethod = this.#viewManager.removeToDo;
+        this.#buttonShop.wireDeleteButtons(cards, deleteMethod, viewDeleteMethod);
     }
 }

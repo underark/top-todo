@@ -36,7 +36,6 @@ export class StorageManager {
             const tasks = localStorage.getItem(project);
             m.set(project, JSON.parse(tasks));
         });
-        console.log(m);
         return m;
     }
 }
