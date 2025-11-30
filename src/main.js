@@ -9,14 +9,10 @@ import "./style.css";
 
 const toDoCoordinator = new ToDoCoordinator();
 const projectManager = ProjectManager();
-const viewManager = ViewManager("#toDo");
 const formManager = new FormManager();
 // Feature is currently broken - find a way to reference the correct project
-const buttonShop = new ButtonShop();
 const storageManager = new StorageManager();
-const form = document.querySelector("form");
 const newProjectButton = document.querySelector("#project-new");
-const options = document.querySelectorAll("select");
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -41,15 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
             formManager.populateProjectSelect(projectManager.getProjectNames());
         }
     })
-
-    // form.addEventListener("submit", e => {
-    //     e.preventDefault();
-    //     const data = new FormData(form);
-    //     const toDo = projectManager.addTaskFromData(data.get("project"), data);
-    //     viewManager.addToDo(data.get("project"), toDo);
-    //     const card = viewManager.getCard(data.get("project"), toDo.id);
-    //     buttonShop.wireButton(row.deleteButton, toDo.id, projectManager.getDeleteMethod("default"), viewManager.removeToDo);
-    // });
 });
 
 document.addEventListener("visibilitychange", () => {

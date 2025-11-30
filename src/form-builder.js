@@ -3,12 +3,13 @@ import { collect } from "./helpers.js";
 export class FormBuilder {
     makeForm() {
         const form = document.createElement("form");
+        const project = this.#makeSelectField("project", "Project: ");
         const title = this.#makeInputField("title", "Title: ");
         const desc = this.#makeInputField("description", "Description: ");
         const due = this.#makeDateField("date", "Due Date: ");
         const priority = this.#makeSelectField("priority", "Priority: ", "Low", "Medium", "High");
         const submit = this.#makeSubmitButton("New to do");
-        collect(form, title, desc, due, priority, submit);
+        collect(form, project, title, desc, due, priority, submit);
         return form;
     }
 

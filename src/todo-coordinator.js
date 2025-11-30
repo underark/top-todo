@@ -3,7 +3,7 @@ import { ViewManager } from "./view-manager";
 import { ButtonShop } from "./button-shop";
 import { StorageManager } from "./storage-manager";
 import { FormManager } from "./form-manager";
-import { LayoutManager } from "./layout-manager";
+import { LayoutSwitcher } from "./layout-switcher";
 
 export class ToDoCoordinator {
     #storageManager;
@@ -11,8 +11,10 @@ export class ToDoCoordinator {
     #viewManager;
     #buttonShop;
     #formManager;
+    #layoutSwitcher;
 
     constructor() {
+        this.#layoutSwitcher = new LayoutSwitcher("#content-area");
         this.#storageManager = new StorageManager();
         this.#projectManager = ProjectManager();
         this.#viewManager = ViewManager("#toDo");
@@ -47,7 +49,7 @@ export class ToDoCoordinator {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             this.#createNewToDo();
-        })
+        });
     }
 
     #createNewToDo() {
