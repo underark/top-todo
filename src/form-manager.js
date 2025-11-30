@@ -7,6 +7,10 @@ export class FormManager {
         this.#projectSelect = document.querySelector("#project");
     }
 
+    getFormData() {
+        return new FormData(this.#form);
+    }
+
     populateProjectSelect(projects) {
         this.#clearProjectSelect();
         projects.forEach(p => {

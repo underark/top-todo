@@ -3,9 +3,9 @@ import { ViewManager } from "./view-manager";
 import { ButtonShop } from "./button-shop";
 import { StorageManager } from "./storage-manager";
 import { FormManager } from "./form-manager";
-import "./style.css";
 import { LayoutManager } from "./layout-manager";
 import { ToDoCoordinator } from "./todo-coordinator";
+import "./style.css";
 
 const toDoCoordinator = new ToDoCoordinator();
 const projectManager = ProjectManager();
@@ -23,14 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
     toDoCoordinator.setUpFromLocalStorage();
     toDoCoordinator.populateToDoDisplay();
     toDoCoordinator.wireDeleteButtons();
-    // formManager.populateProjectSelect(projectManager.getProjectNames());
+    toDoCoordinator.populateProjectSelect();
+    toDoCoordinator.setUpForm();
 
-    // TODO: Add filter for individual projects
-    options.forEach(option => {
-        option.addEventListener("click", () => {
-            viewManager.ShowProjectToDo(option.value);
-        });
-    });
+    // // TODO: Add filter for individual projects
+    // options.forEach(option => {
+    //     option.addEventListener("click", () => {
+    //         viewManager.ShowProjectToDo(option.value);
+    //     });
+    // });
 
 
     newProjectButton.addEventListener("click", () => {
@@ -41,14 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
-    form.addEventListener("submit", e => {
-        e.preventDefault();
-        const data = new FormData(form);
-        const toDo = projectManager.addTaskFromData(data.get("project"), data);
-        viewManager.addToDo(data.get("project"), toDo);
-        const row = viewManager.getRow(data.get("project"), toDo.id);
-        buttonShop.wireButton(row.deleteButton, toDo.id, projectManager.getDeleteMethod("default"), viewManager.removeToDo);
-    });
+    // form.addEventListener("submit", e => {
+    //     e.preventDefault();
+    //     const data = new FormData(form);
+    //     const toDo = projectManager.addTaskFromData(data.get("project"), data);
+    //     viewManager.addToDo(data.get("project"), toDo);
+    //     const card = viewManager.getCard(data.get("project"), toDo.id);
+    //     buttonShop.wireButton(row.deleteButton, toDo.id, projectManager.getDeleteMethod("default"), viewManager.removeToDo);
+    // });
 });
 
 document.addEventListener("visibilitychange", () => {

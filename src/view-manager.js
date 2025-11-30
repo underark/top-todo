@@ -42,8 +42,8 @@ export function ViewManager(selector) {
         return cards;
     }
 
-    const getRow = (project, id) => {
-        return projectRows.get(project).find(r => r.card.id == id);
+    const getCard = (project, id) => {
+        return cards.get(project).find(r => r.card.id == id);
     }
 
     const appendRow = (row) => {
@@ -64,7 +64,7 @@ export function ViewManager(selector) {
         addAllToDo,
         ShowProjectToDo,
         removeToDo,
-        getRow,
+        getCard,
         getCards,
     }
 };
