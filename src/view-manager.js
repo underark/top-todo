@@ -19,10 +19,18 @@ export function ViewManager(selector) {
             toDos.forEach(toDo => addToDo(project, toDo));
         }
     }
-    
-    const ShowProjectToDo = (project) => {
+
+    const showAllToDo = () => {
         clearToDos();
-        const toDoRows = projectRows.get(project);
+        cards.values().forEach(list => {
+            console.log(list);
+            list.forEach(card => appendRow(card.card));
+        })
+    };
+    
+    const showProjectToDo = (project) => {
+        clearToDos();
+        const toDoRows = cards.get(project);
         toDoRows.forEach(row => appendRow(row.row));
     }
 
@@ -62,7 +70,8 @@ export function ViewManager(selector) {
     return {
         addToDo,
         addAllToDo,
-        ShowProjectToDo,
+        showProjectToDo,
+        showAllToDo,
         removeToDo,
         getCard,
         getCards,

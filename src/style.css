@@ -54,7 +54,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Original CSS */
-body {
+html, body {
+	margin: 0;
+	height: 100%;
+}
+
+nav {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+nav img {
+	cursor: pointer;
+}
+
+#grid {
+	height: 100%;
     display: grid;
 	grid-template-columns: 5rem 1fr;
 }

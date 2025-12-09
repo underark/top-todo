@@ -5,7 +5,6 @@ export class FormManager {
     constructor() {
         this.#form = document.querySelector("form");
         this.#projectSelect = document.querySelector("#project");
-        console.log(this.#projectSelect);
     }
 
     getFormData() {

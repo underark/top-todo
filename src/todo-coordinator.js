@@ -59,4 +59,28 @@ export class ToDoCoordinator {
         const card = this.#viewManager.getCard(data.get("project"), toDo.id);
         this.#buttonShop.wireButton(card.deleteButton, toDo.id, this.#projectManager.getDeleteMethod("default"), this.#viewManager.removeToDo);
     }
+
+    setUpHomeButton() {
+        const home = document.querySelector("#home");
+        home.addEventListener("click", () => {
+            this.#layoutSwitcher.switchToToDo();
+            this.#viewManager.showAllToDo();
+        });
+    }
+
+    setUpFormButton() {
+        const f = document.querySelector("#new");
+        f.addEventListener("click", () => {
+            this.#layoutSwitcher.switchToForm();
+        })
+    }
+
+    setUpProjectsButton() {
+        const all = document.querySelector("#all");
+        all.addEventListener("click", () => {
+            this.#layoutSwitcher.switchToProjects();
+        })
+    }
+
+
 }

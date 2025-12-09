@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     toDoCoordinator.wireDeleteButtons();
     toDoCoordinator.populateProjectSelect();
     toDoCoordinator.setUpForm();
+    toDoCoordinator.setUpHomeButton();
+    toDoCoordinator.setUpFormButton();
+    toDoCoordinator.setUpProjectsButton();
 
     // // TODO: Add filter for individual projects
     // options.forEach(option => {
@@ -30,13 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // });
 
 
-    newProjectButton.addEventListener("click", () => {
-        const projectName = prompt("Enter a project title");
-        if (projectName) {
-            projectManager.addProject(projectName);
-            formManager.populateProjectSelect(projectManager.getProjectNames());
-        }
-    })
+    // newProjectButton.addEventListener("click", () => {
+    //     const projectName = prompt("Enter a project title");
+    //     if (projectName) {
+    //         projectManager.addProject(projectName);
+    //         formManager.populateProjectSelect(projectManager.getProjectNames());
+    //     }
+    // })
 });
 
 document.addEventListener("visibilitychange", () => {
