@@ -16,14 +16,7 @@ const newProjectButton = document.querySelector("#project-new");
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    toDoCoordinator.setUpFromLocalStorage();
-    toDoCoordinator.populateToDoDisplay();
-    toDoCoordinator.wireDeleteButtons();
-    toDoCoordinator.populateProjectSelect();
-    toDoCoordinator.setUpForm();
-    toDoCoordinator.setUpHomeButton();
-    toDoCoordinator.setUpFormButton();
-    toDoCoordinator.setUpProjectsButton();
+    toDoCoordinator.setUpFromData();
 
     // // TODO: Add filter for individual projects
     // options.forEach(option => {

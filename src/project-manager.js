@@ -8,8 +8,8 @@ export function ProjectManager() {
         return projects.get(projectName);
     }
 
-    const addTaskFromData = (projectName, data) => {
-        const taskManager = projects.get(projectName);
+    const addTaskFromData = (data) => {
+        const taskManager = projects.get(data.get("project"));
         return taskManager.addTask(data);
     }
 

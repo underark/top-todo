@@ -4,14 +4,14 @@ import { LayoutBuilder } from "./layout-builder";
 export class LayoutManager {
     #formLayout;
     #toDoLayout;
-    #projectsLayout;
+    #projectsSelect;
 
     constructor() {
         const formBuilder = new FormBuilder();
         const layoutBuilder = new LayoutBuilder();
         this.#formLayout = formBuilder.makeForm();
         this.#toDoLayout = layoutBuilder.buildAllToDoScreen();
-        this.#projectsLayout = layoutBuilder.buildProjectsScreen();
+        this.#projectsSelect = layoutBuilder.buildProjectSelect();
     }
 
     get formLayout() {
@@ -23,6 +23,6 @@ export class LayoutManager {
     }
 
     get projectsLayout() {
-        return this.#projectsLayout;
+        return this.#projectsSelect;
     }
 }

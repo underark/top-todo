@@ -4,9 +4,10 @@ import { ButtonShop } from "./button-shop";
 import { StorageManager } from "./storage-manager";
 import { FormManager } from "./form-manager";
 import { LayoutSwitcher } from "./layout-switcher";
+import { TaskService } from "./task-service";
 
 export class ToDoCoordinator {
-    #storageManager;
+    #taskService;
     #projectManager;
     #viewManager;
     #buttonShop;
@@ -15,21 +16,16 @@ export class ToDoCoordinator {
 
     constructor() {
         this.#layoutSwitcher = new LayoutSwitcher("#content-area");
-        this.#storageManager = new StorageManager();
         this.#projectManager = ProjectManager();
         this.#viewManager = ViewManager("#toDo");
         this.#buttonShop = new ButtonShop();
         this.#formManager = new FormManager();
+        this.#taskService = new TaskService();
     }
 
-    setUpFromLocalStorage() {
-        const savedData = this.#storageManager.readFromStorage();
-        this.#projectManager.buildFromObjects(savedData);
-    }
-
-    populateToDoDisplay() {
-        const toDos = this.#projectManager.getProjects();
-        this.#viewManager.addAllToDo(toDos);
+    setUpFromData() {
+        this.#taskService.loadStoredTasks();
+        this.#taskService.populateTodoDisplay();
     }
 
     wireDeleteButtons() {

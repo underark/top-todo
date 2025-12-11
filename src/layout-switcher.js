@@ -29,13 +29,13 @@ export class LayoutSwitcher {
 
     switchToProjects() {
         this.#projects.classList.remove("hidden");
-        this.#toDo.classList.add("hidden");
+        this.#toDo.classList.remove("hidden");
         this.#form.classList.add("hidden");
     }
 
     addLayoutsToContent() {
+        this.#contentArea.appendChild(this.#projects);
         this.#contentArea.appendChild(this.#form);
         this.#contentArea.appendChild(this.#toDo);
-        this.#contentArea.appendChild(this.#projects);
     }
 }

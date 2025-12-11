@@ -6,17 +6,10 @@ export class LayoutBuilder {
         return div;
     }
 
-    buildProjectsScreen() {
-        const div = document.createElement("div");
-        div.id = "projects";
-        div.classList.add("hidden");
-        div.appendChild(this.#buildSelect());        
-        return div;
-    }
-
-    #buildSelect() {
+    buildProjectSelect() {
         const s = document.createElement("select");
         s.id = "projects-select";
+        s.classList.add("hidden");
         return s;
     }
 }
