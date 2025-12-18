@@ -1,14 +1,8 @@
 export class FormManager {
-    #form;
     #projectSelect;
 
     constructor() {
-        this.#form = document.querySelector("form");
         this.#projectSelect = document.querySelector("#project");
-    }
-
-    getFormData() {
-        return new FormData(this.#form);
     }
 
     populateProjectSelect(projects) {

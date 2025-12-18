@@ -16,7 +16,8 @@ const newProjectButton = document.querySelector("#project-new");
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    toDoCoordinator.setUpFromData();
+    toDoCoordinator.performInitialSetup();
+    toDoCoordinator.wireForm();
 
     // // TODO: Add filter for individual projects
     // options.forEach(option => {

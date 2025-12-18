@@ -14,6 +14,7 @@ export class ViewService {
     }
 
     displayNewToDo(project, toDo) {
+        console.log(toDo);
         const newCard = this.#cardFactory.makeCard(toDo);
         this.#cardManager.pushToMap(project, newCard);
         this.#viewManager.showCard(newCard.card);

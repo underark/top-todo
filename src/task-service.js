@@ -6,37 +6,37 @@ import { ViewService } from "./view-service";
 export class TaskService {
     #viewService;
     #projectManager;
-    #formManager;
     #storageManager;
 
     constructor() {
         this.#viewService = new ViewService();
         this.#projectManager = ProjectManager();
-        this.#formManager = new FormManager();
         this.#storageManager = new StorageManager();
     }
 
-    loadStoredTasks() {
+    loadAndPopulateTasks() {
+        this.#loadStoredTasks();
+        this.#populateTodoDisplay();
+    }
+
+    getProjectNames() {
+        return this.#projectManager.getProjectNames();
+    }
+
+    #loadStoredTasks() {
         const saved = this.#storageManager.readFromStorage();
         this.#projectManager.buildFromObjects(saved);
     }
 
-    populateTodoDisplay() {
+    #populateTodoDisplay() {
         const toDos = this.#projectManager.getProjects();
         this.#viewService.populateNewToDos(toDos);
     }
 
     addNewToDo() {
-        const data = this.#formManager.getFormData();
+        const form = document.querySelector("form");
+        const data = new FormData(form);
         const newToDo = this.#projectManager.addTaskFromData(data);
-        this.#viewService.displayNewToDo(newToDo);
+        this.#viewService.displayNewToDo(data.get("project"), newToDo);
     }
-
-    // #createNewToDo() {
-    //     const data = this.#formManager.getFormData();
-    //     const toDo = this.#projectManager.addTaskFromData(data.get("project"), data);
-    //     this.#viewManager.addToDo(data.get("project"), toDo);
-    //     const card = this.#viewManager.getCard(data.get("project"), toDo.id);
-    //     this.#buttonShop.wireButton(card.deleteButton, toDo.id, this.#projectManager.getDeleteMethod("default"), this.#viewManager.removeToDo);
-    // }
 }

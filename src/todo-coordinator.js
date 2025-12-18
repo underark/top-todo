@@ -1,7 +1,6 @@
 import { ProjectManager } from "./project-manager";
 import { ViewManager } from "./view-manager";
 import { ButtonShop } from "./button-shop";
-import { StorageManager } from "./storage-manager";
 import { FormManager } from "./form-manager";
 import { LayoutSwitcher } from "./layout-switcher";
 import { TaskService } from "./task-service";
@@ -23,9 +22,18 @@ export class ToDoCoordinator {
         this.#taskService = new TaskService();
     }
 
-    setUpFromData() {
-        this.#taskService.loadStoredTasks();
-        this.#taskService.populateTodoDisplay();
+    performInitialSetup() {
+        const projectNames = this.#taskService.getProjectNames();
+        this.#taskService.loadAndPopulateTasks();
+        this.#formManager.populateProjectSelect(projectNames);
+    }
+
+    wireForm() {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            this.#taskService.addNewToDo();
+        })
     }
 
     wireDeleteButtons() {
