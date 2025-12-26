@@ -14,20 +14,28 @@ export class ViewService {
     }
 
     displayNewToDo(project, toDo) {
-        console.log(toDo);
         const newCard = this.#cardFactory.makeCard(toDo);
         this.#cardManager.pushToMap(project, newCard);
         this.#viewManager.showCard(newCard.card);
     }
 
-    // Pass in an array
-    #displayAllNewToDos(project, toDos) {
-        toDos.forEach(toDo => this.displayNewToDo(project, toDo));
+    removeToDoFromDisplay(project, id) {
+        this.#viewManager.removeCard(id);
+        this.#cardManager.deleteCard(project, id);
+    }
+
+    getCard(project, id) {
+        return this.#cardManager.getCard(project, id);
     }
 
     populateNewToDos(toDoMap) {
         for (const [project, toDos] of toDoMap) {
             this.#displayAllNewToDos(project, toDos);
         }
+    }
+
+    // Pass in an array
+    #displayAllNewToDos(project, toDos) {
+        toDos.forEach(toDo => this.displayNewToDo(project, toDo));
     }
 }

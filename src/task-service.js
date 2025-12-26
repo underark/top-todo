@@ -1,4 +1,4 @@
-import { FormManager } from "./form-manager";
+import { ButtonShop } from "./button-shop";
 import { ProjectManager } from "./project-manager";
 import { StorageManager } from "./storage-manager";
 import { ViewService } from "./view-service";
@@ -7,11 +7,13 @@ export class TaskService {
     #viewService;
     #projectManager;
     #storageManager;
+    #buttonShop;
 
     constructor() {
         this.#viewService = new ViewService();
         this.#projectManager = ProjectManager();
         this.#storageManager = new StorageManager();
+        this.#buttonShop = new ButtonShop(this.#projectManager, this.#viewService);
     }
 
     loadAndPopulateTasks() {
@@ -36,7 +38,15 @@ export class TaskService {
     addNewToDo() {
         const form = document.querySelector("form");
         const data = new FormData(form);
+        const project = data.get("project");
         const newToDo = this.#projectManager.addTaskFromData(data);
-        this.#viewService.displayNewToDo(data.get("project"), newToDo);
+        this.#viewService.displayNewToDo(project, newToDo);
+        const card = this.#viewService.getCard(project, newToDo.id);
+        this.#buttonShop.wireDeleteButton(card.deleteButton, project, newToDo.id);
+    }
+
+    deleteToDo(project, id) {
+        this.#projectManager.deleteTask(project, id);
+        this.#viewService.removeToDoFromDisplay(project, id);
     }
 }

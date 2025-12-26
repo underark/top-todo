@@ -1,21 +1,16 @@
 export class ButtonShop {
-    wireButton(button, id, ...functions) {
+    #projectManager;
+    #viewService;
+
+    constructor(projectManager, viewService) {
+        this.#projectManager = projectManager;
+        this.#viewService = viewService;
+    }
+
+    wireDeleteButton(button, project, id) {
         button.addEventListener("click", () => {
-            functions.forEach(f => f(id));
+            this.#projectManager.deleteTask(project, id);
+            this.#viewService.removeToDoFromDisplay(project, id);
         });
-    }
-
-    wireDeleteButtons(rowMap, deleteMethod, otherFunctions) {
-        for (const [project, rows] of rowMap) {
-            rows.forEach(row => this.wireButton(row.deleteButton, row.card.id, deleteMethod(project), otherFunctions));
-        }
-    }
-
-    // Using a new function here because these functions will not be using id
-    // like the ones in wireButton() method above
-    wireNewProjectButton(button, ...functions) {
-        button().addEventListener("click", () => {
-            functions.forEach(f => f());
-        })
     }
 }

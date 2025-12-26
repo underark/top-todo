@@ -4,8 +4,13 @@ export function ViewManager(selector) {
     const cardContainer = document.querySelector(selector);
 
     const showCard = (card) => {
-        console.log(cardContainer);
         cardContainer.appendChild(card);
+    }
+
+    const removeCard = (id) => {
+        const card = document.querySelector("#" + id);
+        console.log(id);
+        cardContainer.removeChild(card);
     }
 
     const showCards = (array) => {
@@ -20,6 +25,7 @@ export function ViewManager(selector) {
     
     return {
         showCard,
+        removeCard,
         showCards,
         clearCards,
     }

@@ -14,6 +14,11 @@ export class CardManager {
         }
     }
 
+    deleteCard(project, id) {
+        let savedCards = this.#cards.get(project);
+        savedCards = savedCards.filter(c => c.card.id === id);
+    }
+
     getCards() {
         return this.#cards;
     }
