@@ -28,6 +28,11 @@ export class ViewService {
         return this.#cardManager.getCard(project, id);
     }
 
+    // Values of map are all arrays
+    getCards() {
+        return this.#cardManager.getCards();
+    }
+
     populateNewToDos(toDoMap) {
         for (const [project, toDos] of toDoMap) {
             this.#displayAllNewToDos(project, toDos);

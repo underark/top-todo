@@ -9,7 +9,7 @@ export function ViewManager(selector) {
 
     const removeCard = (id) => {
         const card = document.querySelector("#" + id);
-        console.log(id);
+        console.log(card);
         cardContainer.removeChild(card);
     }
 

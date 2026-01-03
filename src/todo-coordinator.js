@@ -23,8 +23,8 @@ export class ToDoCoordinator {
     }
 
     performInitialSetup() {
-        const projectNames = this.#taskService.getProjectNames();
         this.#taskService.loadAndPopulateTasks();
+        const projectNames = this.#taskService.getProjectNames();
         this.#formManager.populateProjectSelect(projectNames);
     }
 

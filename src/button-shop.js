@@ -13,4 +13,8 @@ export class ButtonShop {
             this.#viewService.removeToDoFromDisplay(project, id);
         });
     }
+
+    wireDeleteButtons(cardArray, project) {
+        cardArray.forEach(card => this.wireDeleteButton(card.deleteButton, project, card.card.id));
+    }
 }

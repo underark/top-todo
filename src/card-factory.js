@@ -1,6 +1,5 @@
 export class CardFactory {
     makeCard(toDo) {
-        console.log(toDo);
         const card = document.createElement("div");
         const t = this.#makeCardTitle(toDo.title);
         const d = this.#makeCardDueDate(toDo.dueDate);

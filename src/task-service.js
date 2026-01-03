@@ -19,6 +19,7 @@ export class TaskService {
     loadAndPopulateTasks() {
         this.#loadStoredTasks();
         this.#populateTodoDisplay();
+        this.#wireExistingToDoButtons();
     }
 
     getProjectNames() {
@@ -28,6 +29,12 @@ export class TaskService {
     #loadStoredTasks() {
         const saved = this.#storageManager.readFromStorage();
         this.#projectManager.buildFromObjects(saved);
+    }
+
+    #wireExistingToDoButtons() {
+        const cardsMap = this.#viewService.getCards();
+        console.log(cardsMap);
+        cardsMap.forEach((cards, project) => this.#buttonShop.wireDeleteButtons(cards, project));
     }
 
     #populateTodoDisplay() {
