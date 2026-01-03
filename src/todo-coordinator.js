@@ -86,5 +86,9 @@ export class ToDoCoordinator {
         })
     }
 
-
+    wireOnQuitSave() {
+        document.addEventListener("visibilitychange", () => {
+            this.#taskService.saveExistingData();
+        })
+    }
 }

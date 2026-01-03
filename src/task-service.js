@@ -56,4 +56,9 @@ export class TaskService {
         this.#projectManager.deleteTask(project, id);
         this.#viewService.removeToDoFromDisplay(project, id);
     }
+
+    saveExistingData() {
+        const data = this.#projectManager.getProjectsAsObjects();
+        this.#storageManager.writeToStorage(data);
+    }
 }

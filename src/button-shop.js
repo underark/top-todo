@@ -15,6 +15,7 @@ export class ButtonShop {
     }
 
     wireDeleteButtons(cardArray, project) {
+        // card.card.id is because the card object has a card field with an id attached to the element
         cardArray.forEach(card => this.wireDeleteButton(card.deleteButton, project, card.card.id));
     }
 }
