@@ -16,7 +16,8 @@ export class CardManager {
 
     deleteCard(project, id) {
         let savedCards = this.#cards.get(project);
-        savedCards = savedCards.filter(c => c.card.id === id);
+        savedCards = savedCards.filter(card => card.card.id !== id);
+        this.#cards.set(project, savedCards);
     }
 
     getCards() {

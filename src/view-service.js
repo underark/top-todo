@@ -24,13 +24,26 @@ export class ViewService {
         this.#cardManager.deleteCard(project, id);
     }
 
+    clearDisplay() {
+        this.#viewManager.clearCards();
+    }
+
     getCard(project, id) {
         return this.#cardManager.getCard(project, id);
     }
 
+    getProjectCards(projectName) {
+        return this.#cardManager.getProjectCards(projectName);
+    }
+
+    // Returns all existing cards
     // Values of map are all arrays
     getCards() {
         return this.#cardManager.getCards();
+    }
+
+    displayProject(cardObjectArray) {
+        this.#viewManager.showCards(cardObjectArray);
     }
 
     populateNewToDos(toDoMap) {

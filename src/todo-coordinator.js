@@ -1,31 +1,23 @@
-import { ProjectManager } from "./project-manager";
-import { ViewManager } from "./view-manager";
-import { ButtonShop } from "./button-shop";
-import { FormManager } from "./form-manager";
+import { SelectManager } from "./select-manager";
 import { LayoutSwitcher } from "./layout-switcher";
 import { TaskService } from "./task-service";
 
 export class ToDoCoordinator {
     #taskService;
-    #projectManager;
-    #viewManager;
-    #buttonShop;
-    #formManager;
+    #selectManager;
     #layoutSwitcher;
 
     constructor() {
         this.#layoutSwitcher = new LayoutSwitcher("#content-area");
-        this.#projectManager = ProjectManager();
-        this.#viewManager = ViewManager("#toDo");
-        this.#buttonShop = new ButtonShop();
-        this.#formManager = new FormManager();
+        this.#selectManager = new SelectManager();
         this.#taskService = new TaskService();
     }
 
     performInitialSetup() {
         this.#taskService.loadAndPopulateTasks();
         const projectNames = this.#taskService.getProjectNames();
-        this.#formManager.populateProjectSelect(projectNames);
+        this.#selectManager.populateProjectSelect("#project", projectNames);
+        this.#selectManager.populateProjectSelect("#projects-select", projectNames);
     }
 
     wireForm() {
@@ -36,53 +28,42 @@ export class ToDoCoordinator {
         })
     }
 
-    wireDeleteButtons() {
-        const cards = this.#viewManager.getCards();
-        const deleteMethod = this.#projectManager.getDeleteMethod;
-        const viewDeleteMethod = this.#viewManager.removeToDo;
-        this.#buttonShop.wireDeleteButtons(cards, deleteMethod, viewDeleteMethod);
+    wireUI() {
+        this.#setUpFormButton();
+        this.#setUpHomeButton();
+        this.#setUpProjectsButton();
     }
 
-    populateProjectSelect() {
-        const projectNames = this.#projectManager.getProjectNames();
-        this.#formManager.populateProjectSelect(projectNames);
-    }
-
-    setUpForm() {
-        const form = document.querySelector("form");
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            this.#createNewToDo();
-        });
-    }
-
-    #createNewToDo() {
-        const data = this.#formManager.getFormData();
-        const toDo = this.#projectManager.addTaskFromData(data.get("project"), data);
-        this.#viewManager.addToDo(data.get("project"), toDo);
-        const card = this.#viewManager.getCard(data.get("project"), toDo.id);
-        this.#buttonShop.wireButton(card.deleteButton, toDo.id, this.#projectManager.getDeleteMethod("default"), this.#viewManager.removeToDo);
-    }
-
-    setUpHomeButton() {
+    #setUpHomeButton() {
         const home = document.querySelector("#home");
         home.addEventListener("click", () => {
-            this.#layoutSwitcher.switchToToDo();
-            this.#viewManager.showAllToDo();
+            this.#layoutSwitcher.showLayout("#toDo");
+            this.#taskService.showAllToDo();
         });
     }
 
-    setUpFormButton() {
+    #setUpFormButton() {
         const f = document.querySelector("#new");
         f.addEventListener("click", () => {
-            this.#layoutSwitcher.switchToForm();
+            this.#layoutSwitcher.showLayout("form");
         })
     }
 
-    setUpProjectsButton() {
+    #setUpProjectsButton() {
         const all = document.querySelector("#all");
         all.addEventListener("click", () => {
-            this.#layoutSwitcher.switchToProjects();
+            const projects = this.#taskService.getProjectNames();
+            this.#selectManager.populateProjectSelect("#projects-select", projects);
+            this.#layoutSwitcher.showLayout("#toDo", "#projects-select");
+            this.#wireProjectSelect();
+        })
+    }
+
+    #wireProjectSelect() {
+        const projectSelect = document.querySelector("#projects-select");
+        projectSelect.addEventListener("change", () => {
+            console.log(projectSelect.textContent);
+            this.#taskService.showProject(projectSelect.value);
         })
     }
 

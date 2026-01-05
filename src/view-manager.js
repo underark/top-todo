@@ -13,8 +13,8 @@ export function ViewManager(selector) {
         cardContainer.removeChild(card);
     }
 
-    const showCards = (array) => {
-        array.forEach(card => showCard(card));
+    const showCards = (cardObjectArray) => {
+        cardObjectArray.forEach(cardObject => showCard(cardObject.card));
     }
     
     const clearCards = () => {

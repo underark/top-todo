@@ -1,23 +1,12 @@
-import { ProjectManager } from "./project-manager";
-import { ViewManager } from "./view-manager";
-import { ButtonShop } from "./button-shop";
-import { StorageManager } from "./storage-manager";
-import { FormManager } from "./form-manager";
-import { LayoutManager } from "./layout-manager";
 import { ToDoCoordinator } from "./todo-coordinator";
 import "./style.css";
 
 const toDoCoordinator = new ToDoCoordinator();
-const projectManager = ProjectManager();
-const formManager = new FormManager();
-// Feature is currently broken - find a way to reference the correct project
-const storageManager = new StorageManager();
-const newProjectButton = document.querySelector("#project-new");
-
 
 document.addEventListener("DOMContentLoaded", () => {
     toDoCoordinator.performInitialSetup();
     toDoCoordinator.wireForm();
+    toDoCoordinator.wireUI();
     toDoCoordinator.wireOnQuitSave();
 
     // // TODO: Add filter for individual projects
@@ -36,12 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //     }
     // })
 });
-
-document.addEventListener("visibilitychange", () => {
-    const projectsMap = projectManager.getProjectsAsObjects();
-    storageManager.writeToStorage(projectsMap);
-}) 
-
 
 // TODO:
 // Add layout switching

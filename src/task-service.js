@@ -33,7 +33,6 @@ export class TaskService {
 
     #wireExistingToDoButtons() {
         const cardsMap = this.#viewService.getCards();
-        console.log(cardsMap);
         cardsMap.forEach((cards, project) => this.#buttonShop.wireDeleteButtons(cards, project));
     }
 
@@ -60,5 +59,19 @@ export class TaskService {
     saveExistingData() {
         const data = this.#projectManager.getProjectsAsObjects();
         this.#storageManager.writeToStorage(data);
+    }
+
+    showAllToDo() {
+        this.#viewService.clearDisplay();
+        const cards = this.#viewService.getCards();
+        cards.forEach(cardObjectArray => {
+            this.#viewService.displayProject(cardObjectArray);
+        })
+    }
+
+    showProject(projectName) {
+        this.#viewService.clearDisplay();
+        const cards = this.#viewService.getProjectCards(projectName);
+        this.#viewService.displayProject(cards);
     }
 }

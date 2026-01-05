@@ -15,22 +15,18 @@ export class LayoutSwitcher {
         this.addLayoutsToContent();
     }
 
-    switchToForm() {
-        this.#form.classList.remove("hidden");
-        this.#projects.classList.add("hidden");
-        this.#toDo.classList.add("hidden");
+    showLayout(...layoutSelectors) {
+        this.#hideAllLayouts();
+        layoutSelectors.forEach(selector => {
+            const chosen = document.querySelector(selector);
+            chosen.classList.remove("hidden");
+        })
     }
 
-    switchToToDo() {
-        this.#form.classList.add("hidden");
-        this.#projects.classList.add("hidden");
-        this.#toDo.classList.remove("hidden");
-    }
-
-    switchToProjects() {
-        this.#projects.classList.remove("hidden");
-        this.#toDo.classList.remove("hidden");
-        this.#form.classList.add("hidden");
+    #hideAllLayouts() {
+        for (const node of this.#contentArea.childNodes) {
+            node.classList.add("hidden");
+        }
     }
 
     addLayoutsToContent() {
