@@ -24,7 +24,7 @@ export class LayoutSwitcher {
     }
 
     #hideAllLayouts() {
-        for (const node of this.#contentArea.childNodes) {
+        for (const node of this.#contentArea.children) {
             node.classList.add("hidden");
         }
     }

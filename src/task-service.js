@@ -77,4 +77,8 @@ export class TaskService {
             this.#viewService.displayProject(cards);
         }
     }
+
+    addNewProject(projectName) {
+        this.#projectManager.addProject(projectName);
+    }
 }
