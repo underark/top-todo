@@ -48,6 +48,7 @@ export class ViewService {
 
     populateNewToDos(toDoMap) {
         for (const [project, toDos] of toDoMap) {
+            this.#cardManager.createMapKey(project);
             this.#displayAllNewToDos(project, toDos);
         }
     }

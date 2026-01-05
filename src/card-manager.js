@@ -5,13 +5,12 @@ export class CardManager {
         this.#cards = new Map();
     }
 
+    createMapKey(projectName) {
+        this.#cards.set(projectName, []);
+    }
+
     pushToMap(project, cardObject) {
-        if (this.#cards.has(project)) {
-            this.#cards.get(project).push(cardObject);
-        } else {
-            this.#cards.set(project, []);
-            this.#cards.get(project).push(cardObject);
-        }
+        this.#cards.get(project).push(cardObject);
     }
 
     deleteCard(project, id) {

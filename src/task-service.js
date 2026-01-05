@@ -72,6 +72,9 @@ export class TaskService {
     showProject(projectName) {
         this.#viewService.clearDisplay();
         const cards = this.#viewService.getProjectCards(projectName);
-        this.#viewService.displayProject(cards);
+        console.log(cards);
+        if (cards.length > 0) {
+            this.#viewService.displayProject(cards);
+        }
     }
 }

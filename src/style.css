@@ -71,7 +71,7 @@ nav img {
 
 #grid {
 	height: 100%;
-    display: grid;
+  display: grid;
 	grid-template-columns: 5rem 1fr;
 }
 
@@ -83,6 +83,12 @@ nav img {
     height: 150px;
     background-color: pink;
     padding: 12px;
+}
+
+#toDo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .hidden {

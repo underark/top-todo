@@ -18,6 +18,7 @@ export class ToDoCoordinator {
         const projectNames = this.#taskService.getProjectNames();
         this.#selectManager.populateProjectSelect("#project", projectNames);
         this.#selectManager.populateProjectSelect("#projects-select", projectNames);
+        this.#wireProjectSelect();
     }
 
     wireForm() {
@@ -55,14 +56,12 @@ export class ToDoCoordinator {
             const projects = this.#taskService.getProjectNames();
             this.#selectManager.populateProjectSelect("#projects-select", projects);
             this.#layoutSwitcher.showLayout("#toDo", "#projects-select");
-            this.#wireProjectSelect();
         })
     }
 
     #wireProjectSelect() {
         const projectSelect = document.querySelector("#projects-select");
         projectSelect.addEventListener("change", () => {
-            console.log(projectSelect.textContent);
             this.#taskService.showProject(projectSelect.value);
         })
     }
